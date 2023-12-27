@@ -14,7 +14,7 @@ function createFilter(){
         const button = document.createElement("button");
         button.setAttribute("category",categorie.id);
         button.setAttribute("class","btn-filter");
-        button.innerHTML = categorie.name ;        
+        button.innerHTML = categorie.name.replace("Hotels", "Hôtels") ;        
         category.appendChild(button);
         button.addEventListener ("click",actionBtnFilter);
     }));
