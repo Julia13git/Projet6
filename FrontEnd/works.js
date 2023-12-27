@@ -1,7 +1,7 @@
 // Variables gloables
 const gallery = document.querySelector(".gallery");
 
-function showGallery(type){
+function showGallery(categoryBtn){
     // Si element HTML active existe on le supprime
     if(document.querySelector(".btn-active")){
         document.querySelector(".btn-active").classList.remove("btn-active");
@@ -17,7 +17,7 @@ function showGallery(type){
     .then(response => response.json())
     .then(works => works.forEach(work => {
             // Filtre sur la categorie ou tt la galerie
-            if (work.categoryId == type || type == 0){
+            if (work.categoryId == categoryBtn || categoryBtn == 0){
                     const figure = document.createElement("figure");
                     const img = document.createElement("img");
                     //figure.innerHTML = "<img src=\"" + work.imageUrl + "\" alt=\"" + work.title + "\">";
