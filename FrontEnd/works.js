@@ -2,7 +2,7 @@
 const gallery = document.querySelector(".gallery");
 
 function showGallery(categoryBtn){
-    // Si element HTML active existe on le supprime
+    // Si un bouton HTML actif existe alors on le rend inactif
     if(document.querySelector(".btn-active")){
         document.querySelector(".btn-active").classList.remove("btn-active");
     }
@@ -38,6 +38,7 @@ function showGallery(categoryBtn){
 showGallery(0);
 document.getElementById("btn-tous").classList.add("btn-active");
 
+// Ajout des events sur l ensemble des boutons 
 const tabBtnFilter = document.querySelectorAll(".btn-filter");
 tabBtnFilter.forEach(function(btn){
     btn.addEventListener ("click",function(event) {         
