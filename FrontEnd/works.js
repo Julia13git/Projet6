@@ -8,7 +8,9 @@ function showGallery(type){
     }
 
     // Boucle pour supprimer un par un les elements figures
-    document.querySelectorAll(".gallery figure").forEach( figure=> figure.remove());    
+    //document.querySelectorAll(".gallery figure").forEach(function(figure){figure.remove()});
+    document.querySelectorAll(".gallery figure").forEach( figure=> figure.remove());
+    
 
     // Appel de l api pour afficher les "works"
     fetch("http://localhost:5678/api/works")
