@@ -13,13 +13,21 @@ document.addEventListener("DOMContentLoaded", () => {
     //testWorks();
 
     function afficheGallery(type){
-        // STEP 1 : Ajouter les figures sur la gallery
-        
+        // Si element HTML active existe on le supprime
+        if(document.querySelector(".btn-active")){
+            document.querySelector(".btn-active").classList.remove("btn-active");
+        }
 
+        // Boucle pour supprimer un par un les elements figures
+        while (gallery.firstChild) {
+            gallery.firstChild.remove();   
+        }
+
+        // Appel de l api pour afficher les "works"
         fetch("http://localhost:5678/api/works")
         .then(response => response.json())
         .then(works => works.forEach(work => {
-                // Filtre que su les hotels
+                // Filtre sur la categorie ou tt la galerie
                 if (work.categoryId == type || type == 0){
                         const figure = document.createElement("figure");
                         figure.innerHTML = "<img src=\"" + work.imageUrl + "\" alt=\"" + work.title + "\">";
@@ -37,57 +45,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const btnObjet = document.getElementById("btn-objet");
     btnObjet.addEventListener ("click",function() {        
-        while (gallery.firstChild) {
-            gallery.firstChild.remove();
-        }
         afficheGallery(1);
+        btnObjet.classList.add("btn-active");
     });
 
     const btnAppart = document.getElementById("btn-appart");
     btnAppart.addEventListener ("click",function() {        
-        while (gallery.firstChild) {
-            gallery.firstChild.remove();
-        }
         afficheGallery(2);
+        btnAppart.classList.add("btn-active");
     });
 
     const btnHotel = document.getElementById("btn-hotel");
     btnHotel.addEventListener ("click",function() {        
-        while (gallery.firstChild) {
-            gallery.firstChild.remove();
-        }
         afficheGallery(3);
+        btnHotel.classList.add("btn-active");
     });
 
     const btnTous = document.getElementById("btn-tous");
     btnTous.addEventListener ("click",function() {        
-        while (gallery.firstChild) {
-            gallery.firstChild.remove();
-        }
         afficheGallery(0);
+        btnTous.classList.add("btn-active");   
     });
 
 });
-
-/*categories*/
-// function category() {    
-//     
-//     const btnObjet = document.getElementById("btn-objet");
-//     btnObjet.addEventListener ("click",function() {
-//         const workObjet = works.filter(function(work) {
-//             return work.categoryId === 1;
-//         })
-//         console.log(btnObjet)
-//     });
-
-//     const btnAppart = document.getElementById("btn-appart");
-//     btnAppart.addEventListener ("click",function() {
-//         console.log(btnAppart)
-//     });
-
-//     const btnHotel = document.getElementById("btn-hotel");
-//     btnHotel.addEventListener ("click",function() {
-//         console.log(btnHotel)
-//     });  
-// };
-//     category();

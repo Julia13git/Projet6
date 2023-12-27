@@ -147,7 +147,7 @@ li:hover {
 	color: #1D6154;
 	padding: 20px;
 }
-button:hover {
+button.btn-active {
 	color: white;
 	background: #1D6154;
 }
