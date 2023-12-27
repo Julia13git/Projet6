@@ -2,30 +2,22 @@
 const gallery = document.querySelector(".gallery");
 const category = document.querySelector(".category");
 
-function createFilter(){
-    
+const actionBtnFilter = function(event) {         
+    showGallery(event.target.getAttribute("category"));
+    event.target.classList.add("btn-active"); 
+}
+
+function createFilter(){    
     fetch("http://localhost:5678/api/categories")
-    .then(response => {response.json()
-    .then(categories => {
-        let filters = '';
-        for (i=0; i < categories.length; i++) {
-            console.log(categories[i].id);
-            filters = filters + '<button category="'+ categories[i].id + '" class="btn-filter" > '+ categories[i].name + '</button>'
-        }
-        document.querySelector(".category").innerHTML = 
-        document.querySelector(".category").innerHTML + filters;            
-        // Ajout des events sur l ensemble des boutons 
-        const tabBtnFilter = document.querySelectorAll(".btn-filter");
-        tabBtnFilter.forEach(function(btn){
-            btn.addEventListener ("click",function(event) {         
-                showGallery(event.target.getAttribute("category"));
-                event.target.classList.add("btn-active"); 
-            });
-        });
-    })
-}) 
-
-
+    .then(response => response.json())
+    .then(categories => categories.forEach(categorie => {
+        const button = document.createElement("button");
+        button.setAttribute("category",categorie.id);
+        button.setAttribute("class","btn-filter");
+        button.innerHTML = categorie.name ;        
+        category.appendChild(button);
+        button.addEventListener ("click",actionBtnFilter);
+    }));
 }
 
 
@@ -65,4 +57,7 @@ function showGallery(categoryBtn){
 createFilter();
 // Appelé une seule fois au chargement de la page
 showGallery(0);
-document.getElementById("btn-tous").classList.add("btn-active");
+const btnTous = document.getElementById("btn-tous");
+btnTous.addEventListener ("click",actionBtnFilter);
+btnTous.classList.add("btn-active");
+
