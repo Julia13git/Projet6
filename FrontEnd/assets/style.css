@@ -87,11 +87,19 @@ h2{
 }
 
 #mode-edition {
-	width: 1440px;
+	width: 1140px;
 	height: 59px;
-	flex-shrink: 0;
 	background: #000;
 	display: none;
+    justify-content: center;
+	align-items: center;
+	gap: 7px;
+}
+#mode-edition i{
+	color: white;
+}
+#mode-edition p{
+	color: white;
 }
 
 nav ul {
