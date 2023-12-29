@@ -7,21 +7,23 @@ const actionBtnFilter = function(event) {
     event.target.classList.add("btn-active"); 
 }
 
-function createFilter(){    
-    fetch("http://localhost:5678/api/categories")
-    .then(response => response.json())
-    .then(categories => categories.forEach(categorie => {
+async function createFilter(){    
+    let response = await fetch("http://localhost:5678/api/categories");
+    let categories = await response.json();
+    categories = categories.forEach(categorie => {
+    //.then(response => response.json())
+    //.then(categories => categories.forEach(categorie => {
         const button = document.createElement("button");
         button.setAttribute("data-category",categorie.id);
         button.setAttribute("class","btn-filter");
         button.innerHTML = categorie.name.replace("Hotels", "Hôtels") ;        
         category.appendChild(button);
         button.addEventListener ("click",actionBtnFilter);
-    }));
+    });
 }
 
 
-function showGallery(categoryBtn){
+async function showGallery(categoryBtn){
     // Si un bouton HTML actif existe alors on le rend inactif
     if(document.querySelector(".btn-active")){
         document.querySelector(".btn-active").classList.remove("btn-active");
@@ -33,9 +35,11 @@ function showGallery(categoryBtn){
     
     
     // Appel de l api pour afficher les "works"
-    fetch("http://localhost:5678/api/works")
-    .then(response => response.json())
-    .then(works => works.forEach(work => {
+    let response = await fetch("http://localhost:5678/api/works");
+    let works = await response.json();
+    works = works.forEach(work => {
+    //.then(response => response.json())
+    //.then(works => works.forEach(work => {
         // Filtre sur la categorie ou tt la galerie
         if (work.categoryId == categoryBtn || categoryBtn == 0){
             const figure = document.createElement("figure");
@@ -49,8 +53,7 @@ function showGallery(categoryBtn){
             figure.appendChild(figcaption);
             gallery.appendChild(figure);   
         }                                             
-    })            
-    )
+    });         
     
 }
 
