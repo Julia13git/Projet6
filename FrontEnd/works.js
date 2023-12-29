@@ -3,7 +3,7 @@ const gallery = document.querySelector(".gallery");
 const category = document.querySelector(".category");
 
 const actionBtnFilter = function(event) {         
-    showGallery(event.target.getAttribute("category"));
+    showGallery(event.target.dataset.category);
     event.target.classList.add("btn-active"); 
 }
 
@@ -12,7 +12,7 @@ function createFilter(){
     .then(response => response.json())
     .then(categories => categories.forEach(categorie => {
         const button = document.createElement("button");
-        button.setAttribute("category",categorie.id);
+        button.setAttribute("data-category",categorie.id);
         button.setAttribute("class","btn-filter");
         button.innerHTML = categorie.name.replace("Hotels", "Hôtels") ;        
         category.appendChild(button);
@@ -57,7 +57,7 @@ function showGallery(categoryBtn){
 createFilter();
 // Appelé une seule fois au chargement de la page
 showGallery(0);
-const btnTous = document.getElementById("btn-tous");
+const btnTous = document.querySelector(".btn-tous");
 btnTous.addEventListener ("click",actionBtnFilter);
 btnTous.classList.add("btn-active");
 
