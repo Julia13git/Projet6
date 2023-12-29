@@ -85,6 +85,15 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+#mode-edition {
+	width: 1440px;
+	height: 59px;
+	flex-shrink: 0;
+	background: #000;
+	display: none;
+}
+
 nav ul {
 	display: flex;
 	align-items: center;

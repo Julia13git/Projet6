@@ -1,6 +1,8 @@
 // Variables gloables
 const gallery = document.querySelector(".gallery");
 const category = document.querySelector(".category");
+// Récupération token éventuellement stockées dans le localStorage
+const token = window.localStorage.getItem("token");
 
 const actionBtnFilter = function(event) {         
     showGallery(event.target.dataset.category);
@@ -11,8 +13,8 @@ async function createFilter(){
     let response = await fetch("http://localhost:5678/api/categories");
     let categories = await response.json();
     categories = categories.forEach(categorie => {
-    //.then(response => response.json())
-    //.then(categories => categories.forEach(categorie => {
+        //.then(response => response.json())
+        //.then(categories => categories.forEach(categorie => {
         const button = document.createElement("button");
         button.setAttribute("data-category",categorie.id);
         button.setAttribute("class","btn-filter");
@@ -38,8 +40,8 @@ async function showGallery(categoryBtn){
     let response = await fetch("http://localhost:5678/api/works");
     let works = await response.json();
     works = works.forEach(work => {
-    //.then(response => response.json())
-    //.then(works => works.forEach(work => {
+        //.then(response => response.json())
+        //.then(works => works.forEach(work => {
         // Filtre sur la categorie ou tt la galerie
         if (work.categoryId == categoryBtn || categoryBtn == 0){
             const figure = document.createElement("figure");
@@ -63,4 +65,23 @@ showGallery(0);
 const btnTous = document.querySelector(".btn-tous");
 btnTous.addEventListener ("click",actionBtnFilter);
 btnTous.classList.add("btn-active");
+
+
+if (token) {
+    console.log("token:" + token);
+    // Supprime les filtres
+    const filterGroup = document.querySelector(".category");
+    filterGroup.remove();
+
+    // Changement de login en logout
+    let loginLink = document.getElementById("login-link");
+    loginLink.innerHTML = '<a id="logout-link" href="#"><li>logout</li></a>';
+
+    //Ceation banniere noire mode edition
+    let modeEdition  = document.getElementById("mode-edition");
+    modeEdition.style.display = "block";
+
+} else {
+    console.log(0);
+}
 
