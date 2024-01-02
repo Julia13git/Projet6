@@ -75,13 +75,19 @@ if (token) {
 
     // Changement de login en logout
     let loginLink = document.getElementById("login-link");
-    loginLink.innerHTML = '<a id="logout-link" href="#"><li>logout</li></a>';
+    loginLink.innerHTML = '<a id="logout-link" href="#">logout</a>';
+    const logOut = document.getElementById("logout-link");
+    logOut.addEventListener ("click", ()=>{
+        window.localStorage.removeItem("token");
+        window.location.reload();
+    })
 
     //Ceation banniere noire mode edition
     let modeEdition  = document.getElementById("mode-edition");
     modeEdition.style.display = "flex";
+} 
 
-} else {
-    console.log(0);
-}
+
+
+
 

@@ -15,6 +15,8 @@ async function login (event) {
         const token = tabUser["token"];
         console.log(token);
         window.localStorage.setItem("token",token );
+        window.location.replace("index.html");
+
     } catch (error){
         console.log("Connexion impossible");
     }
