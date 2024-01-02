@@ -19,6 +19,7 @@ async function login (event) {
         } else {
             const errorMessage = document.getElementById("error-message");
             errorMessage.style.display = "block";
+
         }
     } catch (error){
         console.log("Connexion impossible");

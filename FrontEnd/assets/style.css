@@ -102,6 +102,18 @@ h2{
 	color: white;
 }
 
+#modifier {
+	display: flex;
+	gap: 7px;
+	position: absolute;
+	top: 7px;
+	right: 365px;
+}
+#modifier p {
+	font-size: 14px;
+	font-weight: 400;
+}
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -143,6 +155,9 @@ li:hover {
 
 #introduction p {
 	margin-bottom: 0.5em;
+}
+#portfolio {
+	position: relative;
 }
 #portfolio h2 {
 	text-align: center;
