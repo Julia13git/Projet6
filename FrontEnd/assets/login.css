@@ -144,6 +144,13 @@ li:hover {
 	color: black;
 	text-align: center;
 }
+#login div {
+	color: red;
+	text-align: center;
+	height: 25px;
+	margin-bottom: 10px;
+	display: none;
+}
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;

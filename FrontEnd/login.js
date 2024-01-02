@@ -10,13 +10,16 @@ async function login (event) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         })
-
-        const tabUser  = await response.json();
-        const token = tabUser["token"];
-        console.log(token);
-        window.localStorage.setItem("token",token );
-        window.location.replace("index.html");
-
+        if (response.status === 200){
+            const tabUser  = await response.json();
+            const token = tabUser["token"];
+            console.log(token);
+            window.localStorage.setItem("token",token );
+            window.location.replace("index.html");
+        } else {
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.style.display = "block";
+        }
     } catch (error){
         console.log("Connexion impossible");
     }
