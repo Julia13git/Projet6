@@ -85,6 +85,8 @@ if (token) {
     //Ceation banniere noire mode edition
     let modeEdition  = document.getElementById("mode-edition");
     modeEdition.style.display = "flex";
+    let modifier = document.getElementById("modifier");
+    modifier.style.display = "flex";
 } 
 
 

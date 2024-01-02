@@ -108,6 +108,7 @@ h2{
 	position: absolute;
 	top: 7px;
 	right: 365px;
+	display: none;
 }
 #modifier p {
 	font-size: 14px;
