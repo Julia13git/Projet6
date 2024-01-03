@@ -89,7 +89,24 @@ if (token) {
     modifier.style.display = "flex";
 } 
 
+const linkModal = document.querySelector(".modal-link");
+linkModal.addEventListener("click", function(){
+    document.getElementById("modal").style.display = "flex";
+})
 
+// function openModal() {
+//     document.querySelector(".modal-content").style.display = "flex";
+//   }
+
+const btnModal = document.getElementById("btn-close");
+console.log("btnModal");
+btnModal.addEventListener("click", function(){
+    document.getElementById("modal").style.display = "none";
+})
+
+// function closeModal() {
+//     document.querySelector(".modal-content").style.display = "none";
+// }
 
 
 

@@ -113,6 +113,65 @@ h2{
 #modifier p {
 	font-size: 14px;
 	font-weight: 400;
+	cursor: pointer;
+}
+
+#modal {
+	display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 1140px;
+    background-color: rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+}
+.title-modal {
+text-align: center;
+font-family: Work Sans;
+font-size: 26px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.modal-content {
+	width: 630px;
+	height: 688px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 30px;
+	background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	gap: 10px;
+}
+.fa-xmark{
+	font-size: 24px;
+	align-self: flex-end;
+	cursor: pointer;
+    float: right;
+    font-size: 18px;
+    font-weight: bold;
+}
+.line {
+	width: 420px;
+	height: 1px;
+	background: #B3B3B3;
+}
+.btn-modal {
+	width: 237px;
+	height: 36px;
+	border-radius: 60px;
+	background: #1D6154;
+	color: white;
+	font-family: Syne;
+	font-style: normal;
+	line-height: normal;
+	font-size: 14px;
+	font-weight: 700;
+	border: none;
 }
 
 nav ul {
