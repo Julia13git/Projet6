@@ -89,24 +89,33 @@ if (token) {
     modifier.style.display = "flex";
 } 
 
-const linkModal = document.querySelector(".modal-link");
-linkModal.addEventListener("click", function(){
-    document.getElementById("modal").style.display = "flex";
+const openModal = document.querySelector(".open-modal");
+openModal.addEventListener("click", function(){
+    document.getElementById("modal").style.display = "flex";  
+              
 })
 
-// function openModal() {
-//     document.querySelector(".modal-content").style.display = "flex";
-//   }
+const galleryModal = document.querySelector(".gallery-modal");
+    let response = fetch("http://localhost:5678/api/works").then(response => {
+    let works = response.json().then(works => {
+        let html = '';
+        for (i = 0; i < works.length; i++) {
+            const figure = document.createElement("figure");
+            const img = document.createElement("img");
+            //figure.innerHTML = "<img src=\"" + work.imageUrl + "\" alt=\"" + work.title + "\">";
+            img.setAttribute("src", works[i].imageUrl);
+            figure.appendChild(img);                    
+            galleryModal.appendChild(figure);   
+        }
+    }) 
+})
 
-const btnModal = document.getElementById("btn-close");
-console.log("btnModal");
-btnModal.addEventListener("click", function(){
+
+const closeModal = document.getElementById("close-modal");
+closeModal.addEventListener("click", function(){
     document.getElementById("modal").style.display = "none";
 })
 
-// function closeModal() {
-//     document.querySelector(".modal-content").style.display = "none";
-// }
 
 
 
