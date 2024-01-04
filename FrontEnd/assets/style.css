@@ -30,7 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-	background: #FFFEF8;
+	background: #FFFEF8;/*la couleur du backgound*/
 }
 ol, ul {
 	list-style: none;
@@ -85,8 +85,8 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
-
-#mode-edition {
+/*Bar-edition*/
+#bar-edition {
 	width: 1140px;
 	height: 59px;
 	background: #000;
@@ -95,13 +95,13 @@ h2{
 	align-items: center;
 	gap: 7px;
 }
-#mode-edition i{
+#bar-edition i{
 	color: white;
 }
-#mode-edition p{
+#bar-edition p{
 	color: white;
 }
-
+/*Le bouton modifier*/
 #modifier {
 	display: flex;
 	gap: 7px;
@@ -115,7 +115,7 @@ h2{
 	font-weight: 400;
 	cursor: pointer;
 }
-
+/*la modale fenetre*/
 #modal {
 	display: none;
     position: fixed;
@@ -132,12 +132,12 @@ h2{
 	height: 104.08px;	
 }
 .title-modal {
-text-align: center;
-font-family: Work Sans;
-font-size: 26px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
 }
 .modal-content {
 	width: 630px;
@@ -159,7 +159,6 @@ line-height: normal;
     font-size: 18px;
     font-weight: bold;
 }
-
 .gallery-modal {
 	display: flex;
 	flex-wrap: wrap;
@@ -167,7 +166,28 @@ line-height: normal;
 	column-gap: 8px;
 	row-gap: 30px;
 }
-
+.figure-modal {
+	position: relative;
+}
+.trash-block {
+	width: 17px;
+    height: 17px;
+    position: absolute;
+    background: black;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+	border-radius: 2px;
+	display: flex;
+	text-align: center;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.fa-trash-can {
+	font-size: xx-small;
+}
 .line {
 	width: 420px;
 	height: 1px;
@@ -219,14 +239,12 @@ li:hover {
 	margin: auto;
 	width: 80%;
 }
-
 #introduction article {
 	flex: 1
 }
 #introduction h2 {
 	margin-bottom: 1em;
 }
-
 #introduction p {
 	margin-bottom: 0.5em;
 }
@@ -237,7 +255,7 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
-
+/*Category block*/
 .category {
 	display: flex;
 	flex-direction: row;
@@ -245,7 +263,6 @@ li:hover {
 	margin-bottom: 3em;
 	gap: 15px;
 }
-
 .category button {
 	display: flex;
 	border:  2px solid #1D6154;
