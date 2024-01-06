@@ -103,24 +103,53 @@ openModal.addEventListener("click", function(){
             const img = document.createElement("img");
             const trashBlock = document.createElement("div");
             trashBlock.classList.add("trash-block");
-            trashBlock.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
+            trashBlock.innerHTML= '<i class="fa-solid fa-trash-can" data-id="' + works[i].id + '"></i>';                        
             img.setAttribute("src", works[i].imageUrl);
+            img.setAttribute("id", works[i].id);
             figure.classList.add("figure-modal");
             figure.appendChild(trashBlock);
             figure.appendChild(img);                    
             galleryModal.appendChild(figure);   
         }
+
+        // Ajout listeners sur tt les poubelles
+        const allTrashCan = document.querySelectorAll('.fa-trash-can');
+        allTrashCan.forEach(trashCan => {
+            trashCan.addEventListener("click", function (event) {
+                const id = event.target.dataset.id;
+                console.log(id)
+                const deleteConfirmed = confirm("Voulez vous supprimer le projet ?");
+                console.log(deleteConfirmed);
+                if (deleteConfirmed){
+                    fetch ("http://localhost:5678/api/works/" + id , { 
+                        method: 'DELETE', 
+                        headers: {Authorization: 'Bearer ' + token }
+                    })
+                    .then (response=> {
+                        let worksDelete = response.json();
+                        console.log(worksDelete);
+                        alert("Projet supprimé !")
+                    })
+                }
+            })
+        });
+        
     }) 
 })
 })
-
-
 
 //Fermeture de la fenetre modale
 const closeModal = document.getElementById("close-modal");
 closeModal.addEventListener("click", function(){
     document.getElementById("modal").style.display = "none";
 })
+
+/*const listBtnDelete = document.querySelectorAll(".fa-trash-can");
+console.log(listBtnDelete);
+listBtnDelete.setAttribute("data-category",works[i].id);
+listBtnDelete.addEventListener("click", ()=> {
+    console.log("click")
+})*/
 
 
 
