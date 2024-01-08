@@ -144,12 +144,32 @@ closeModal.addEventListener("click", function(){
     document.getElementById("modal").style.display = "none";
 })
 
-/*const listBtnDelete = document.querySelectorAll(".fa-trash-can");
-console.log(listBtnDelete);
-listBtnDelete.setAttribute("data-category",works[i].id);
-listBtnDelete.addEventListener("click", ()=> {
-    console.log("click")
-})*/
+//Récuperer le btnModal"Ajouter une photo " et ajouter un événement
+const btnModal = document.querySelector(".btn-modal");
+btnModal.addEventListener("click", ()=> {
+    document.getElementById("modal-content").style.display = "none";
+    document.querySelector(".ajout-photo").style.display = "flex";
+})
+
+//Recuper la fleche, ajoute un clique, change le style
+const btnArrow = document.querySelector(".fa-arrow-left");
+btnArrow.addEventListener("click", ()=> {
+    document.querySelector(".ajout-photo").style.display = "none";
+    document.getElementById("modal-content").style.display = "flex";
+})
+
+const closeModalPhoto = document.getElementById("close-modal-photo");
+closeModalPhoto.addEventListener("click", function(){
+    document.getElementById("modal").style.display = "none";
+    //window.location.reload();//on reload la page
+})
+
+const btnConfirm = document.querySelector(".btn-valider");
+btnConfirm.addEventListener("click", function(){
+    console.log("click");
+})
+
+
 
 
 

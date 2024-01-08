@@ -49,12 +49,36 @@
 			<p class="open-modal">modifier</p>
 		</div>
 		<div id="modal">
-			<div class="modal-content">
+			<div id="modal-content">
 				<i id="close-modal" class="fa-solid fa-xmark"></i>
 				<p class="title-modal">Galerie photo</p>
 				<div class="gallery-modal"></div>
 				<div class="line"></div>
 					<button class="btn-modal">Ajouter une photo</button>
+			</div>
+			<div class="ajout-photo">
+				<div class="ajout-photo-nav">
+					<i class="fa-solid fa-arrow-left"></i>
+					<i id="close-modal-photo" class="fa-solid fa-xmark"></i>
+				</div>
+					<p class="title-modal">Ajout photo</p>
+				<div class="photo-block">
+					<i class="fa-regular fa-image"></i>
+					<button id="btn-ajouter-photo">+ Ajouter photo</button>
+					<p class="ajout-photo-text">jpg, png : 4mo max</p>
+				</div>
+					<label for="title">Titre</label>
+					<input class="input-text" type="text" name="title">
+					<label for="select-category">Catégorie</label>
+					<select type="select" class="input-text"  name="select-category">
+						<option value="">--Choisir la categorie--</option>
+						<option value="all">Tous</option>
+						<option value="objets">Objets</option>
+						<option value="appartements">Appartements</option>
+						<option value="hotels">Hotels & restaurants</option>
+					</select>
+					<div class="line"></div>
+					<button class="btn-valider">Valider</button>
 			</div>
 		</div>
 		<div class="category">

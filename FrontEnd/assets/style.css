@@ -132,14 +132,11 @@ h2{
 	height: 104.08px;	
 }
 .title-modal {
-	text-align: center;
-	font-family: Work Sans;
 	font-size: 26px;
-	font-style: normal;
-	font-weight: 400;
 	line-height: normal;
+	margin-bottom: 25px;
 }
-.modal-content {
+#modal-content {
 	width: 630px;
 	height: 688px;
 	display: flex;
@@ -149,9 +146,10 @@ h2{
 	background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-	gap: 10px;
 }
-.fa-xmark{
+
+.fa-xmark,
+.fa-arrow-left {
 	font-size: 24px;
 	align-self: flex-end;
 	cursor: pointer;
@@ -162,7 +160,7 @@ h2{
 .gallery-modal {
 	display: flex;
 	flex-wrap: wrap;
-	padding: 45px 100px;
+	padding: 5px 100px;
 	column-gap: 8px;
 	row-gap: 30px;
 }
@@ -192,7 +190,7 @@ h2{
 	width: 420px;
 	height: 1px;
 	background: #B3B3B3;
-	margin-bottom: 70px;
+	margin-block: 80px;
 }
 .btn-modal {
 	width: 237px;
@@ -206,6 +204,83 @@ h2{
 	font-size: 14px;
 	font-weight: 700;
 	border: none;
+}
+.ajout-photo {
+	width: 630px;
+	height: 688px;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	padding: 30px;
+	background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	
+}
+.ajout-photo-nav{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+.photo-block{
+	width: 420px;
+	height: 169px;
+	border-radius: 3px;
+	background: #E8F1F6;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	gap: 6px;
+	margin-bottom: 25px;
+}
+.fa-image{
+	font-size:75px;
+	color: #B9C5CC;
+}
+#btn-ajouter-photo{
+	width: 173px;
+	height: 36px;
+	border-radius: 50px;
+	border: none;
+	background: #CBD6DC;
+	color: #306685;
+	font-family: Work Sans;
+	font-size: 14px;
+}
+.ajout-photo-text{
+	color: #444;
+	font-size: 10px;
+	line-height: normal;
+}
+label{
+	color: #3D3D3D;
+	line-height: normal;
+	align-self: flex-start;
+    margin-left: 105px;
+	margin-bottom: 10px;
+}
+.input-text{
+	width: 420px;
+	height: 51px;
+	background: #FFF;
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+	border: none;
+	margin-bottom: 25px;
+}
+select{
+	padding: 15px;
+}
+.btn-valider{
+	width: 237px;
+	height: 36px;
+	border-radius: 60px;
+	background: #A7A7A7;
+	border: none;
+	color: #FFF;
+	font-family: Syne;
+	font-size: 14px;
+
 }
 
 nav ul {
