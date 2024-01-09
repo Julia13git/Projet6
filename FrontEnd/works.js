@@ -93,6 +93,8 @@ if (token) {
 const openModal = document.querySelector(".open-modal");
 openModal.addEventListener("click", function(){
     document.getElementById("modal").style.display = "flex";  
+    document.getElementById("modal-content").style.display = "flex";
+    document.querySelector(".ajout-photo").style.display = "none";
     //Création de la gallery dans la fenetre modale
     const galleryModal = document.querySelector(".gallery-modal");
     document.querySelectorAll(".gallery-modal figure").forEach( figure=> figure.remove());
@@ -161,13 +163,60 @@ btnArrow.addEventListener("click", ()=> {
 const closeModalPhoto = document.getElementById("close-modal-photo");
 closeModalPhoto.addEventListener("click", function(){
     document.getElementById("modal").style.display = "none";
-    //window.location.reload();//on reload la page
 })
 
+//Preview une photo avant confirmer
+// const imageAjoute = document.getElementById("image-ajoute");
+// const previewPicture = function (e){
+//      const[picture] = e.files;
+//      if (picture) {
+//         // On change l'URL de l'image
+//          image.src = URL.createObjectURL(picture)
+//     }
+// }
+function previewImage() {
+    const fileInput = document.getElementById('input-photo');
+    const file = fileInput.files[0];
+    const imagePreviewContainer = document.getElementById('previewImageContainer');
+    
+    if(file.type.match('image.*')){
+      const reader = new FileReader();
+      
+      reader.addEventListener('load', function (event) {
+        const imageUrl = event.target.result;
+        const image = new Image();
+        
+        image.addEventListener('load', function() {
+          imagePreviewContainer.innerHTML = ''; // Vider le conteneur au cas où il y aurait déjà des images.
+          imagePreviewContainer.appendChild(image);
+        });
+        
+        image.src = imageUrl;
+        image.style.width = '129px'; // Indiquez les dimensions souhaitées ici.
+        image.style.height = '193px'; // Vous pouvez également utiliser "px" si vous voulez spécifier une hauteur.
+      });
+      
+      reader.readAsDataURL(file);
+    }
+  }
+
+//Ajouter une photo
 const btnConfirm = document.querySelector(".btn-valider");
-btnConfirm.addEventListener("click", function(){
-    console.log("click");
+btnConfirm.addEventListener("click", async()=>{
+    const formData = new FormData();
+    formData.append("title");
+    formData.append("category");
+
+    const image = document.getElementById("input-ajouter-photo");
+    formData.append("image");
+
+    const response = await fetch ("http://localhost:5678/api/works", {
+        method: "POST",
+        body: formData,
+    });
+    console.log(await response.json());
 })
+
 
 
 

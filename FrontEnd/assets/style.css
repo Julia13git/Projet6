@@ -238,38 +238,49 @@ h2{
 	font-size:75px;
 	color: #B9C5CC;
 }
-#btn-ajouter-photo{
+#btn-ajout-photo{
 	width: 173px;
 	height: 36px;
 	border-radius: 50px;
 	border: none;
 	background: #CBD6DC;
 	color: #306685;
-	font-family: Work Sans;
-	font-size: 14px;
+	/*font-family: Work Sans;
+	font-size: 14px;*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#input-photo{
+	display: none;
 }
 .ajout-photo-text{
 	color: #444;
 	font-size: 10px;
 	line-height: normal;
 }
-label{
+.label-title{
 	color: #3D3D3D;
 	line-height: normal;
 	align-self: flex-start;
     margin-left: 105px;
 	margin-bottom: 10px;
 }
-.input-text{
-	width: 420px;
-	height: 51px;
+
+select, .input-title {
 	background: #FFF;
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
 	border: none;
 	margin-bottom: 25px;
+	padding: 15px;
+}
+.input-title{
+	width: 390px;
+	height: 21px;
 }
 select{
-	padding: 15px;
+	width: 420px;
+	height: 51px;
 }
 .btn-valider{
 	width: 237px;
