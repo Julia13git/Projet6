@@ -138,42 +138,34 @@ openModal.addEventListener("click", function(){
         
     }) 
 })
-})
+});
 
 //Fermeture de la fenetre modale
 const closeModal = document.getElementById("close-modal");
 closeModal.addEventListener("click", function(){
     document.getElementById("modal").style.display = "none";
-})
+});
 
 //Récuperer le btnModal"Ajouter une photo " et ajouter un événement
 const btnModal = document.querySelector(".btn-modal");
 btnModal.addEventListener("click", ()=> {
     document.getElementById("modal-content").style.display = "none";
     document.querySelector(".ajout-photo").style.display = "flex";
-})
+});
 
 //Recuper la fleche, ajoute un clique, change le style
 const btnArrow = document.querySelector(".fa-arrow-left");
 btnArrow.addEventListener("click", ()=> {
     document.querySelector(".ajout-photo").style.display = "none";
     document.getElementById("modal-content").style.display = "flex";
-})
+});
 
 const closeModalPhoto = document.getElementById("close-modal-photo");
 closeModalPhoto.addEventListener("click", function(){
     document.getElementById("modal").style.display = "none";
-})
+});
 
-//Preview une photo avant confirmer
-// const imageAjoute = document.getElementById("image-ajoute");
-// const previewPicture = function (e){
-//      const[picture] = e.files;
-//      if (picture) {
-//         // On change l'URL de l'image
-//          image.src = URL.createObjectURL(picture)
-//     }
-// }
+
 function previewImage() {
     const fileInput = document.getElementById('input-photo');
     const file = fileInput.files[0];
@@ -182,11 +174,11 @@ function previewImage() {
     if(file.type.match('image.*')){
       const reader = new FileReader();
       
-      reader.addEventListener('load', function (event) {
+      reader.addEventListener('load', function (event) {        
         const imageUrl = event.target.result;
         const image = new Image();
         
-        image.addEventListener('load', function() {
+        image.addEventListener('load', function(event) {
           imagePreviewContainer.innerHTML = ''; // Vider le conteneur au cas où il y aurait déjà des images.
           imagePreviewContainer.appendChild(image);
         });
@@ -194,7 +186,8 @@ function previewImage() {
         image.src = imageUrl;
         image.style.width = '129px'; // Indiquez les dimensions souhaitées ici.
         image.style.height = '193px'; // Vous pouvez également utiliser "px" si vous voulez spécifier une hauteur.
-      });
+       
+    });
       
       reader.readAsDataURL(file);
     }
@@ -202,20 +195,33 @@ function previewImage() {
 
 //Ajouter une photo
 const btnConfirm = document.querySelector(".btn-valider");
-btnConfirm.addEventListener("click", async()=>{
-    const formData = new FormData();
-    formData.append("title");
-    formData.append("category");
+btnConfirm.addEventListener("click", async(event)=>{   
+    const formData = new FormData();    
+    event.preventDefault();//prevent the page from refreshing 
+    try {
+        formData.append("title", document.getElementById("title").value);
+        formData.append("category", parseInt(document.getElementById("select-category").value));
 
-    const image = document.getElementById("input-ajouter-photo");
-    formData.append("image");
+        const inputPhoto = document.getElementById("input-photo");
+        formData.append("image",inputPhoto.files[0]);
+        
+        const response = await fetch ("http://localhost:5678/api/works", {
+            method: "POST",
+            body: formData,
+            headers: { Authorization: 'Bearer ' + token }
+        });
 
-    const response = await fetch ("http://localhost:5678/api/works", {
-        method: "POST",
-        body: formData,
-    });
-    console.log(await response.json());
-})
+        if (response.status === 200 || response.status === 201){
+            document.getElementById("message-info-ajout").innerHTML = "Sauvegarde Ok"
+        } else {
+            document.getElementById("message-info-ajout").innerHTML = "Echec de la sauvegarde"
+        }
+        console.log(await response.json());
+        
+    } catch (error){
+        console.error(error);
+    }
+});
 
 
 
