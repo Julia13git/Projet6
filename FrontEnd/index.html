@@ -56,7 +56,7 @@
 					<div class="line"></div>
 					<button class="btn-modal">Ajouter une photo</button>
 				</div>
-				<div class="ajout-photo">
+				<form id="form-ajout-photo" class="ajout-photo">
 					<div class="ajout-photo-nav">
 						<i class="fa-solid fa-arrow-left"></i>
 						<i id="close-modal-photo" class="fa-solid fa-xmark"></i>
@@ -64,30 +64,25 @@
 					<p class="title-modal">Ajout photo</p>
 					<div class="photo-block">						
 						<i class="fa-regular fa-image"></i>
-						<label id="btn-ajout-photo" for="input-photo">
-							+ Ajouter photo</label>
-							<input type="file" id="input-photo"	accept=".jpg, .jpeg, .png" 
-							onchange="previewImage()" multiple />
-							<div id="previewImageContainer"></div>
-							<!-- <img src="#" alt="" id="image-ajoute" 
-								style="display:none; max-width: 129px; max-height: 193px; border: none;"/> -->
-								<span class="ajout-photo-text">jpg, png : 4mo max</span>
-							</div>
-							<label class="label-title" for="title">Titre</label>
-							<input class="input-title" type="text" id="title">
-							<label class="label-title" for="select-category">Catégorie</label>
-							<select type="select" id="select-category">
-								<option value="">--Choisir la categorie--</option>								
-								<option value="1">Objets</option>
-								<option value="2">Appartements</option>
-								<option value="3">Hotels & restaurants</option>
-							</select>
-							<div class="line"></div>
-							<div id="message-info-ajout"></div>							
-							<button class="btn-valider">Valider</button>
-						</div>
+						<label id="btn-ajout-photo" for="input-photo">+ Ajouter photo</label>
+						<input class="input-ajout-photo" type="file" id="input-photo"	accept=".jpg, .jpeg, .png" onchange="previewImage()" multiple />
+						<div id="previewImageContainer"></div>
+						<span class="ajout-photo-text">jpg, png : 4mo max</span>
 					</div>
-				</div>
+						<label class="label-title" for="title">Titre</label>
+						<input class="input-title input-ajout-photo" type="text" id="title">
+						<label class="label-title" for="select-category">Catégorie</label>
+						<select class="input-ajout-photo" type="select" id="select-category">
+							<option value="">--Choisir la categorie--</option>								
+							<option value="1">Objets</option>
+							<option value="2">Appartements</option>
+							<option value="3">Hotels & restaurants</option>
+						</select>
+						<div class="line"></div>
+						<div id="message-info-ajout"></div>							
+						<button class="btn-valider" disabled >Valider</button>
+					</form>
+			</div>
 				<div class="category">
 					<button class="btn-tous btn-filter" data-category="0">Tous</button>
 				</div>

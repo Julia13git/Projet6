@@ -10,6 +10,8 @@ const actionBtnFilter = function(event) {
     event.target.classList.add("btn-active"); 
 }
 
+let imageLoaded = false;
+
 async function createFilter(){ 
     //L'appel a serveur les categories   
     let response = await fetch("http://localhost:5678/api/categories");
@@ -180,7 +182,7 @@ function previewImage() {
         
         image.addEventListener('load', function(event) {
           imagePreviewContainer.innerHTML = ''; // Vider le conteneur au cas où il y aurait déjà des images.
-          imagePreviewContainer.appendChild(image);
+          imagePreviewContainer.appendChild(image);          
         });
         
         image.src = imageUrl;
@@ -190,6 +192,7 @@ function previewImage() {
     });
       
       reader.readAsDataURL(file);
+      imageLoaded = true;
     }
   }
 
@@ -204,11 +207,12 @@ btnConfirm.addEventListener("click", async(event)=>{
 
         const inputPhoto = document.getElementById("input-photo");
         formData.append("image",inputPhoto.files[0]);
-        
+
         const response = await fetch ("http://localhost:5678/api/works", {
             method: "POST",
             body: formData,
             headers: { Authorization: 'Bearer ' + token }
+            
         });
 
         if (response.status === 200 || response.status === 201){
@@ -223,9 +227,30 @@ btnConfirm.addEventListener("click", async(event)=>{
     }
 });
 
+const formAjoutPhoto = document.getElementById("form-ajout-photo");
+formAjoutPhoto.addEventListener('submit', function(event) {
+    console.log("Ne submit pas !!")
+    event.preventDefault();
+});
 
 
+const listeInputAjoutPhoto = document.querySelectorAll(".input-ajout-photo");
+listeInputAjoutPhoto.forEach(element => {
+    element.addEventListener("change", function(event){
+        console.log("sortie element " + event.target.id  + 
+        "/ image chargée : " + imageLoaded);
 
+        // Si l ensemble des elements sont remplis Alors on met le bouton Valider à vert
+        if (document.getElementById("title").value != "" && 
+        document.getElementById("select-category").value != "" && imageLoaded){
+            btnConfirm.style.background = "#1D6154";
+            btnConfirm.removeAttribute('disabled');
+        } else {
+            btnConfirm.style.background = "#A7A7A7";
+            btnConfirm.setAttribute('disabled', '');
+        }
+    })
+});
 
 
 
