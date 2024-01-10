@@ -149,6 +149,7 @@ openModal.addEventListener("click", function(){
 const closeModal = document.getElementById("close-modal");
 closeModal.addEventListener("click", function(){
     document.getElementById("modal").style.display = "none";
+    showGallery(0);
 });
 
 //Récuperer le btnModal"Ajouter une photo " et ajouter un événement
