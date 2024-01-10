@@ -62,55 +62,58 @@
 						<i id="close-modal-photo" class="fa-solid fa-xmark"></i>
 					</div>
 					<p class="title-modal">Ajout photo</p>
-					<div class="photo-block">						
-						<i class="fa-regular fa-image"></i>
-						<label id="btn-ajout-photo" for="input-photo">+ Ajouter photo</label>
-						<input class="input-ajout-photo" type="file" id="input-photo"	accept=".jpg, .jpeg, .png" onchange="previewImage()" multiple />
+					<div class="photo-block">
+						<div id="inputImageContainer">
+							<i class="fa-regular fa-image"></i>
+							<label  for="input-photo">
+								<span id="btn-ajout-photo">+ Ajouter photo</span>
+								<input class="input-ajout-photo" type="file" id="input-photo" accept=".jpg, .jpeg, .png" onchange="previewImage()" multiple />
+							</label>
+							<span class="ajout-photo-text">jpg, png : 4mo max</span>
+						</div>
 						<div id="previewImageContainer"></div>
-						<span class="ajout-photo-text">jpg, png : 4mo max</span>
 					</div>
-						<label class="label-title" for="title">Titre</label>
-						<input class="input-title input-ajout-photo" type="text" id="title">
-						<label class="label-title" for="select-category">Catégorie</label>
-						<select class="input-ajout-photo" type="select" id="select-category">
-							<option value="">--Choisir la categorie--</option>								
-							<option value="1">Objets</option>
-							<option value="2">Appartements</option>
-							<option value="3">Hotels & restaurants</option>
-						</select>
-						<div class="line"></div>
-						<div id="message-info-ajout"></div>							
-						<button class="btn-valider" disabled >Valider</button>
-					</form>
-			</div>
-				<div class="category">
-					<button class="btn-tous btn-filter" data-category="0">Tous</button>
-				</div>
-				<div class="gallery">
-				</div>
-			</section>
-			<section id="contact">
-				<h2>Contact</h2>
-				<p>Vous avez un projet ? Discutons-en !</p>
-				<form action="#" method="post">
-					<label for="name">Nom</label>
-					<input type="text" name="name" id="name">
-					<label for="email">Email</label>
-					<input type="email" name="email" id="email">
-					<label for="message">Message</label>
-					<textarea name="message" id="message" cols="30" rows="10"></textarea>
-					<input type="submit" value="Envoyer">
+					<label class="label-title" for="title">Titre</label>
+					<input class="input-title input-ajout-photo" type="text" id="title" required>
+					<label class="label-title" for="select-category">Catégorie</label>
+					<select class="input-ajout-photo" type="select" id="select-category">
+						<option value="">--Choisir la categorie--</option>								
+						<option value="1">Objets</option>
+						<option value="2">Appartements</option>
+						<option value="3">Hotels & restaurants</option>
+					</select>
+					<div class="line"></div>
+					<div id="message-info-ajout"></div>							
+					<button class="btn-valider" disabled >Valider</button>
 				</form>
-			</section>
-		</main>
-		
-		<footer>
-			<nav>
-				<ul>
-					<li>Mentions Légales</li>
-				</ul>
-			</nav>
-		</footer>
-	</body>
-	</html>
+			</div>
+			<div class="category">
+				<button class="btn-tous btn-filter" data-category="0">Tous</button>
+			</div>
+			<div class="gallery">
+			</div>
+		</section>
+		<section id="contact">
+			<h2>Contact</h2>
+			<p>Vous avez un projet ? Discutons-en !</p>
+			<form action="#" method="post">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email">
+				<label for="message">Message</label>
+				<textarea name="message" id="message" cols="30" rows="10"></textarea>
+				<input type="submit" value="Envoyer">
+			</form>
+		</section>
+	</main>
 	
+	<footer>
+		<nav>
+			<ul>
+				<li>Mentions Légales</li>
+			</ul>
+		</nav>
+	</footer>
+</body>
+</html>

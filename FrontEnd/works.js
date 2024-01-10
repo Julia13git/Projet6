@@ -115,7 +115,7 @@ openModal.addEventListener("click", function(){
             figure.appendChild(img);                    
             galleryModal.appendChild(figure);   
         }
-
+        
         // Ajout listeners sur tt les poubelles
         const allTrashCan = document.querySelectorAll('.fa-trash-can');
         allTrashCan.forEach(trashCan => {
@@ -126,19 +126,22 @@ openModal.addEventListener("click", function(){
                 console.log(deleteConfirmed);
                 if (deleteConfirmed){
                     fetch ("http://localhost:5678/api/works/" + id , { 
-                        method: 'DELETE', 
-                        headers: {Authorization: 'Bearer ' + token }
-                    })
-                    .then (response=> {
-                        let worksDelete = response.json();
-                        console.log(worksDelete);
-                        alert("Projet supprimé !")
-                    })
-                }
-            })
-        });
-        
-    }) 
+                    method: 'DELETE', 
+                    headers: {Authorization: 'Bearer ' + token }
+                })
+                .then (response=> {
+                    let worksDelete = response.json();
+                    console.log(worksDelete);
+                    alert("Projet supprimé !")
+                    document.getElementById("previewImageContainer").style.display = "none";
+                    document.getElementById("inputImageContainer").style.display = "flex";                    
+                    document.querySelector(".open-modal").click();                    
+                })
+            }
+        })
+    });
+    
+}) 
 })
 });
 
@@ -153,6 +156,9 @@ const btnModal = document.querySelector(".btn-modal");
 btnModal.addEventListener("click", ()=> {
     document.getElementById("modal-content").style.display = "none";
     document.querySelector(".ajout-photo").style.display = "flex";
+    document.getElementById("previewImageContainer").style.display = "none";
+    document.getElementById("inputImageContainer").style.display = "flex";
+    document.getElementById("message-info-ajout").innerHTML=""
 });
 
 //Recuper la fleche, ajoute un clique, change le style
@@ -160,6 +166,8 @@ const btnArrow = document.querySelector(".fa-arrow-left");
 btnArrow.addEventListener("click", ()=> {
     document.querySelector(".ajout-photo").style.display = "none";
     document.getElementById("modal-content").style.display = "flex";
+    document.getElementById("previewImageContainer").style.display = "none";
+    document.getElementById("inputImageContainer").style.display = "flex";
 });
 
 const closeModalPhoto = document.getElementById("close-modal-photo");
@@ -167,64 +175,75 @@ closeModalPhoto.addEventListener("click", function(){
     document.getElementById("modal").style.display = "none";
 });
 
-
+//Afficher l'image selectioné
 function previewImage() {
     const fileInput = document.getElementById('input-photo');
     const file = fileInput.files[0];
-    const imagePreviewContainer = document.getElementById('previewImageContainer');
-    
+    const previewImageContainer = document.getElementById('previewImageContainer');
+    previewImageContainer.style.display = "flex";
+
     if(file.type.match('image.*')){
-      const reader = new FileReader();
-      
-      reader.addEventListener('load', function (event) {        
-        const imageUrl = event.target.result;
-        const image = new Image();
+        const reader = new FileReader();
         
-        image.addEventListener('load', function(event) {
-          imagePreviewContainer.innerHTML = ''; // Vider le conteneur au cas où il y aurait déjà des images.
-          imagePreviewContainer.appendChild(image);          
+        reader.addEventListener('load', function (event) {        
+            const imageUrl = event.target.result;
+            const image = new Image();
+            
+            image.addEventListener('load', function(event) {
+                document.getElementById("inputImageContainer").style.display = "none";
+                
+                previewImageContainer.innerHTML = ''; // Vider le conteneur au cas où il y aurait déjà des images.
+                previewImageContainer.appendChild(image);
+                
+            });            
+            image.src = imageUrl;
+            image.style.width = '129px';
+            image.style.height = '170px'; 
         });
         
-        image.src = imageUrl;
-        image.style.width = '129px'; // Indiquez les dimensions souhaitées ici.
-        image.style.height = '193px'; // Vous pouvez également utiliser "px" si vous voulez spécifier une hauteur.
-       
-    });
-      
-      reader.readAsDataURL(file);
-      imageLoaded = true;
+        reader.readAsDataURL(file);
+        imageLoaded = true;
     }
-  }
+}
 
 //Ajouter une photo
 const btnConfirm = document.querySelector(".btn-valider");
 btnConfirm.addEventListener("click", async(event)=>{   
-    const formData = new FormData();    
     event.preventDefault();//prevent the page from refreshing 
+    const formData = new FormData();   
     try {
         formData.append("title", document.getElementById("title").value);
         formData.append("category", parseInt(document.getElementById("select-category").value));
-
+        
         const inputPhoto = document.getElementById("input-photo");
         formData.append("image",inputPhoto.files[0]);
-
-        const response = await fetch ("http://localhost:5678/api/works", {
-            method: "POST",
-            body: formData,
-            headers: { Authorization: 'Bearer ' + token }
-            
-        });
-
-        if (response.status === 200 || response.status === 201){
-            document.getElementById("message-info-ajout").innerHTML = "Sauvegarde Ok"
-        } else {
-            document.getElementById("message-info-ajout").innerHTML = "Echec de la sauvegarde"
-        }
-        console.log(await response.json());
         
-    } catch (error){
-        console.error(error);
+        const response = await fetch ("http://localhost:5678/api/works", {
+        method: "POST",
+        body: formData,
+        headers: { Authorization: 'Bearer ' + token }
+        
+    });
+    
+    if (response.status === 200 || response.status === 201){
+        document.getElementById("message-info-ajout").innerHTML = "Sauvegarde Ok"
+        // Reset bouton et formulaire
+        imageLoaded = false ;
+        btnConfirm.style.background = "#A7A7A7";
+        btnConfirm.setAttribute('disabled', '');
+        document.getElementById("form-ajout-photo").reset();
+        // Rappel des elements de la fenetre modale
+        document.querySelector(".open-modal").click();  
+        
+
+    } else {
+        document.getElementById("message-info-ajout").innerHTML = "Echec de la sauvegarde"
     }
+    console.log(await response.json());
+    
+} catch (error){
+    console.error(error);
+}
 });
 
 const formAjoutPhoto = document.getElementById("form-ajout-photo");
@@ -236,9 +255,7 @@ formAjoutPhoto.addEventListener('submit', function(event) {
 
 const listeInputAjoutPhoto = document.querySelectorAll(".input-ajout-photo");
 listeInputAjoutPhoto.forEach(element => {
-    element.addEventListener("change", function(event){
-        console.log("sortie element " + event.target.id  + 
-        "/ image chargée : " + imageLoaded);
+    element.addEventListener("change", function(){
 
         // Si l ensemble des elements sont remplis Alors on met le bouton Valider à vert
         if (document.getElementById("title").value != "" && 

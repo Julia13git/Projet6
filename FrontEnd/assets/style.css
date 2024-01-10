@@ -185,6 +185,7 @@ h2{
 }
 .fa-trash-can {
 	font-size: xx-small;
+	cursor: pointer;
 }
 .line {
 	width: 420px;
@@ -204,6 +205,7 @@ h2{
 	font-size: 14px;
 	font-weight: 700;
 	border: none;
+	cursor: pointer;
 }
 .ajout-photo {
 	width: 630px;
@@ -214,8 +216,7 @@ h2{
 	padding: 30px;
 	background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-	
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);	
 }
 .ajout-photo-nav{
 	display: flex;
@@ -234,6 +235,12 @@ h2{
 	gap: 6px;
 	margin-bottom: 25px;
 }
+#inputImageContainer {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
 .fa-image{
 	font-size:75px;
 	color: #B9C5CC;
@@ -250,6 +257,7 @@ h2{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
 }
 #input-photo{
 	display: none;
