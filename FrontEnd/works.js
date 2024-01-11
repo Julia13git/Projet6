@@ -145,12 +145,21 @@ openModal.addEventListener("click", function(){
 })
 });
 
-//Fermeture de la fenetre modale
+//Fermeture de la fenetre modale avec l'icone fermer
 const closeModal = document.getElementById("close-modal");
 closeModal.addEventListener("click", function(){
     document.getElementById("modal").style.display = "none";
     showGallery(0);
 });
+// Fermeture de la fenetre modale avec le click dehors la modale
+const myModal = document.getElementById("modal");
+myModal.addEventListener("click", function(event){
+    if (event.target == myModal)
+    {
+        myModal.style.display ="none";
+    }
+})
+
 
 //Récuperer le btnModal"Ajouter une photo " et ajouter un événement
 const btnModal = document.querySelector(".btn-modal");
@@ -159,7 +168,7 @@ btnModal.addEventListener("click", ()=> {
     document.querySelector(".ajout-photo").style.display = "flex";
     document.getElementById("previewImageContainer").style.display = "none";
     document.getElementById("inputImageContainer").style.display = "flex";
-    document.getElementById("message-info-ajout").innerHTML=""
+    document.getElementById("message-info-ajout").innerHTML="";
 });
 
 //Recuper la fleche, ajoute un clique, change le style
@@ -170,7 +179,7 @@ btnArrow.addEventListener("click", ()=> {
     document.getElementById("previewImageContainer").style.display = "none";
     document.getElementById("inputImageContainer").style.display = "flex";
 });
-
+//Fermer la fenetre modale "ajout photo" avec le bouton fermer
 const closeModalPhoto = document.getElementById("close-modal-photo");
 closeModalPhoto.addEventListener("click", function(){
     document.getElementById("modal").style.display = "none";
@@ -183,31 +192,30 @@ function previewImage() {
     const previewImageContainer = document.getElementById('previewImageContainer');
     previewImageContainer.style.display = "flex";
 
-    if(file.type.match('image.*')){
+    if(file.type.match('image.*')){//it controls image being read only
         const reader = new FileReader();
         
         reader.addEventListener('load', function (event) {        
-            const imageUrl = event.target.result;
+            const imageUrl = event.target.result;//result en cas de succes
             const image = new Image();
             
             image.addEventListener('load', function(event) {
                 document.getElementById("inputImageContainer").style.display = "none";
-                
                 previewImageContainer.innerHTML = ''; // Vider le conteneur au cas où il y aurait déjà des images.
                 previewImageContainer.appendChild(image);
-                
-            });            
+            }); 
+
             image.src = imageUrl;
             image.style.width = '129px';
             image.style.height = '170px'; 
         });
         
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file);//is used to read the contents of the specified Blob or File.
         imageLoaded = true;
     }
 }
 
-//Ajouter une photo
+//Confirmer d'ajout une photo
 const btnConfirm = document.querySelector(".btn-valider");
 btnConfirm.addEventListener("click", async(event)=>{   
     event.preventDefault();//prevent the page from refreshing 
@@ -223,11 +231,10 @@ btnConfirm.addEventListener("click", async(event)=>{
         method: "POST",
         body: formData,
         headers: { Authorization: 'Bearer ' + token }
-        
     });
     
     if (response.status === 200 || response.status === 201){
-        document.getElementById("message-info-ajout").innerHTML = "Sauvegarde Ok"
+        document.getElementById("message-info-ajout").innerHTML = "Sauvegarde Ok";
         // Reset bouton et formulaire
         imageLoaded = false ;
         btnConfirm.style.background = "#A7A7A7";
@@ -235,8 +242,6 @@ btnConfirm.addEventListener("click", async(event)=>{
         document.getElementById("form-ajout-photo").reset();
         // Rappel des elements de la fenetre modale
         document.querySelector(".open-modal").click();  
-        
-
     } else {
         document.getElementById("message-info-ajout").innerHTML = "Echec de la sauvegarde"
     }
@@ -247,13 +252,7 @@ btnConfirm.addEventListener("click", async(event)=>{
 }
 });
 
-const formAjoutPhoto = document.getElementById("form-ajout-photo");
-formAjoutPhoto.addEventListener('submit', function(event) {
-    console.log("Ne submit pas !!")
-    event.preventDefault();
-});
-
-
+//La comportement du bouton valider
 const listeInputAjoutPhoto = document.querySelectorAll(".input-ajout-photo");
 listeInputAjoutPhoto.forEach(element => {
     element.addEventListener("change", function(){
@@ -269,6 +268,4 @@ listeInputAjoutPhoto.forEach(element => {
         }
     })
 });
-
-
 
