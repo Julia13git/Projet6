@@ -12,6 +12,14 @@ const actionBtnFilter = function(event) {
 
 let imageLoaded = false;
 
+// Reset bouton et formulaire
+function resetBtnForm() {
+imageLoaded = false ;
+btnConfirm.style.background = "#A7A7A7";
+btnConfirm.setAttribute('disabled', '');
+document.getElementById("form-ajout-photo").reset();
+}
+
 async function createFilter(){ 
     //L'appel a serveur les categories   
     let response = await fetch("http://localhost:5678/api/categories");
@@ -160,7 +168,6 @@ myModal.addEventListener("click", function(event){
     }
 })
 
-
 //Récuperer le btnModal"Ajouter une photo " et ajouter un événement
 const btnModal = document.querySelector(".btn-modal");
 btnModal.addEventListener("click", ()=> {
@@ -169,6 +176,7 @@ btnModal.addEventListener("click", ()=> {
     document.getElementById("previewImageContainer").style.display = "none";
     document.getElementById("inputImageContainer").style.display = "flex";
     document.getElementById("message-info-ajout").innerHTML="";
+    resetBtnForm();// Reset bouton et formulaire
 });
 
 //Recuper la fleche, ajoute un clique, change le style
@@ -235,21 +243,15 @@ btnConfirm.addEventListener("click", async(event)=>{
     
     if (response.status === 200 || response.status === 201){
         document.getElementById("message-info-ajout").innerHTML = "Sauvegarde Ok";
-        // Reset bouton et formulaire
-        imageLoaded = false ;
-        btnConfirm.style.background = "#A7A7A7";
-        btnConfirm.setAttribute('disabled', '');
-        document.getElementById("form-ajout-photo").reset();
-        // Rappel des elements de la fenetre modale
+        resetBtnForm();// Reset bouton et formulaire
         document.querySelector(".open-modal").click();  
     } else {
         document.getElementById("message-info-ajout").innerHTML = "Echec de la sauvegarde"
     }
-    console.log(await response.json());
-    
-} catch (error){
+
+    } catch (error){
     console.error(error);
-}
+    }
 });
 
 //La comportement du bouton valider
