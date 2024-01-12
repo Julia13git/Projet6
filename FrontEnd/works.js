@@ -14,10 +14,10 @@ let imageLoaded = false;
 
 // Reset bouton et formulaire
 function resetBtnForm() {
-imageLoaded = false ;
-btnConfirm.style.background = "#A7A7A7";
-btnConfirm.setAttribute('disabled', '');
-document.getElementById("form-ajout-photo").reset();
+    imageLoaded = false ;
+    btnConfirm.style.background = "#A7A7A7";
+    btnConfirm.setAttribute('disabled', '');
+    document.getElementById("form-ajout-photo").reset();
 }
 
 async function createFilter(){ 
@@ -128,24 +128,19 @@ openModal.addEventListener("click", function(){
         const allTrashCan = document.querySelectorAll('.fa-trash-can');
         allTrashCan.forEach(trashCan => {
             trashCan.addEventListener("click", function (event) {
-                const id = event.target.dataset.id;
-                console.log(id)
-                const deleteConfirmed = confirm("Voulez vous supprimer le projet ?");
-                console.log(deleteConfirmed);
-                if (deleteConfirmed){
-                    fetch ("http://localhost:5678/api/works/" + id , { 
-                    method: 'DELETE', 
-                    headers: {Authorization: 'Bearer ' + token }
-                })
-                .then (response=> {
-                    let worksDelete = response.json();
-                    console.log(worksDelete);
-                    alert("Projet supprimé !")
-                    document.getElementById("previewImageContainer").style.display = "none";
-                    document.getElementById("inputImageContainer").style.display = "flex";                    
-                    document.querySelector(".open-modal").click();                    
-                })
-            }
+                const id = event.target.dataset.id;                              
+                fetch ("http://localhost:5678/api/works/" + id , { 
+                method: 'DELETE', 
+                headers: {Authorization: 'Bearer ' + token }
+            })
+            .then (response=> {
+                let worksDelete = response.json();
+                document.getElementById("previewImageContainer").style.display = "none";
+                document.getElementById("inputImageContainer").style.display = "flex";                    
+                document.querySelector(".open-modal").click(); 
+                showGallery(0);                   
+            })
+            
         })
     });
     
@@ -199,7 +194,7 @@ function previewImage() {
     const file = fileInput.files[0];
     const previewImageContainer = document.getElementById('previewImageContainer');
     previewImageContainer.style.display = "flex";
-
+    
     if(file.type.match('image.*')){//it controls image being read only
         const reader = new FileReader();
         
@@ -212,7 +207,7 @@ function previewImage() {
                 previewImageContainer.innerHTML = ''; // Vider le conteneur au cas où il y aurait déjà des images.
                 previewImageContainer.appendChild(image);
             }); 
-
+            
             image.src = imageUrl;
             image.style.width = '129px';
             image.style.height = '170px'; 
@@ -245,20 +240,21 @@ btnConfirm.addEventListener("click", async(event)=>{
         document.getElementById("message-info-ajout").innerHTML = "Sauvegarde Ok";
         resetBtnForm();// Reset bouton et formulaire
         document.querySelector(".open-modal").click();  
+        showGallery(0);
     } else {
         document.getElementById("message-info-ajout").innerHTML = "Echec de la sauvegarde"
     }
-
-    } catch (error){
+    
+} catch (error){
     console.error(error);
-    }
+}
 });
 
 //La comportement du bouton valider
 const listeInputAjoutPhoto = document.querySelectorAll(".input-ajout-photo");
 listeInputAjoutPhoto.forEach(element => {
     element.addEventListener("change", function(){
-
+        
         // Si l ensemble des elements sont remplis Alors on met le bouton Valider à vert
         if (document.getElementById("title").value != "" && 
         document.getElementById("select-category").value != "" && imageLoaded){
