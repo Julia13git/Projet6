@@ -8,7 +8,7 @@ const token = window.localStorage.getItem("token");
 const actionBtnFilter = function(event) {         
     showGallery(event.target.dataset.category);
     event.target.classList.add("btn-active"); 
-}
+};
 
 let imageLoaded = false;
 
@@ -90,7 +90,7 @@ if (token) {
     logOut.addEventListener ("click", ()=>{//on ajoute un évenement
         window.localStorage.removeItem("token");//on supprime le token du local storage
         window.location.reload();//on reload la page
-    })
+    });
     
     //Creation banniere noire bar-edition et modifier et changement du style
     let modeEdition  = document.getElementById("bar-edition");
@@ -139,13 +139,13 @@ openModal.addEventListener("click", function(){
                 document.getElementById("inputImageContainer").style.display = "flex";                    
                 document.querySelector(".open-modal").click(); 
                 showGallery(0);                   
-            })
+            });
             
-        })
+        });
     });
     
-}) 
-})
+});
+});
 });
 
 //Fermeture de la fenetre modale avec l'icone fermer
@@ -161,7 +161,7 @@ myModal.addEventListener("click", function(event){
     {
         myModal.style.display ="none";
     }
-})
+});
 
 //Récuperer le btnModal"Ajouter une photo " et ajouter un événement
 const btnModal = document.querySelector(".btn-modal");
@@ -188,7 +188,7 @@ closeModalPhoto.addEventListener("click", function(){
     document.getElementById("modal").style.display = "none";
 });
 
-//Afficher l'image selectioné
+//Afficher l'image selectionée
 function previewImage() {
     const fileInput = document.getElementById('input-photo');
     const file = fileInput.files[0];
@@ -197,32 +197,31 @@ function previewImage() {
     
     if(file.type.match('image.*')){//it controls image being read only
         const reader = new FileReader();
-        
-        reader.addEventListener('load', function (event) {        
+            reader.addEventListener('load', function (event) {        
             const imageUrl = event.target.result;//result en cas de succes
-            const image = new Image();
+            const image = new Image();            
             
-            image.addEventListener('load', function(event) {
-                document.getElementById("inputImageContainer").style.display = "none";
-                previewImageContainer.innerHTML = ''; // Vider le conteneur au cas où il y aurait déjà des images.
-                previewImageContainer.appendChild(image);
-            }); 
+             image.addEventListener('load', function(event) {
+                  document.getElementById("inputImageContainer").style.display = "none";
+                  previewImageContainer.innerHTML = ''; // Vider le conteneur au cas où il y aurait déjà des images.
+                  previewImageContainer.appendChild(image);
+              }); 
             
             image.src = imageUrl;
             image.style.width = '129px';
             image.style.height = '170px'; 
         });
         
-        reader.readAsDataURL(file);//is used to read the contents of the specified Blob or File.
+        reader.readAsDataURL(file);//is used to read the contents of the specified File.
         imageLoaded = true;
     }
 }
 
 //Confirmer d'ajout une photo
 const btnConfirm = document.querySelector(".btn-valider");
-btnConfirm.addEventListener("click", async(event)=>{   
+btnConfirm.addEventListener("click", async(event)=>{    
+    const formData = new FormData(); 
     event.preventDefault();//prevent the page from refreshing 
-    const formData = new FormData();   
     try {
         formData.append("title", document.getElementById("title").value);
         formData.append("category", parseInt(document.getElementById("select-category").value));
@@ -234,15 +233,14 @@ btnConfirm.addEventListener("click", async(event)=>{
         method: "POST",
         body: formData,
         headers: { Authorization: 'Bearer ' + token }
-    });
-    
+        });
+
     if (response.status === 200 || response.status === 201){
-        document.getElementById("message-info-ajout").innerHTML = "Sauvegarde Ok";
         resetBtnForm();// Reset bouton et formulaire
         document.querySelector(".open-modal").click();  
         showGallery(0);
     } else {
-        document.getElementById("message-info-ajout").innerHTML = "Echec de la sauvegarde"
+        document.getElementById("message-info-ajout").innerHTML = "Echec de la sauvegarde";
     }
     
 } catch (error){
@@ -259,11 +257,11 @@ listeInputAjoutPhoto.forEach(element => {
         if (document.getElementById("title").value != "" && 
         document.getElementById("select-category").value != "" && imageLoaded){
             btnConfirm.style.background = "#1D6154";
-            btnConfirm.removeAttribute('disabled');
+            btnConfirm.removeAttribute("disabled");
         } else {
             btnConfirm.style.background = "#A7A7A7";
-            btnConfirm.setAttribute('disabled', '');
+            btnConfirm.setAttribute("disabled", '');
         }
-    })
+    });
 });
 

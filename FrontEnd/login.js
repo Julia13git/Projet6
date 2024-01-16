@@ -1,4 +1,4 @@
-async function login (event) {
+async function login(event) {
 
     try {
         const body = {
@@ -9,10 +9,10 @@ async function login (event) {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
-        })
+        });
         if (response.status === 200){
             const tabUser  = await response.json();
-            const token = tabUser["token"];
+            const token = tabUser.token;
             console.log(token);//affiche dans le console
             window.localStorage.setItem("token",token );//sauvegarde le token
             window.location.replace("index.html");//redirection vers la page index.html
@@ -30,7 +30,3 @@ formLogin.addEventListener("submit", function (event) {
     login(event);
     event.preventDefault();//prevent the page from refreshing
 });
-
-
-
- 

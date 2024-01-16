@@ -66,8 +66,8 @@
 						<div id="inputImageContainer">
 							<i class="fa-regular fa-image"></i>
 							<label  for="input-photo">
-								<span id="btn-ajout-photo">+ Ajouter photo</span>
-								<input class="input-ajout-photo" type="file" id="input-photo" accept=".jpg, .jpeg, .png" onchange="previewImage()" multiple >
+								<span id="btn-ajout-photo" >+ Ajouter photo</span>
+								<input class="input-ajout-photo" type="file" id="input-photo" accept=".jpg, .png" onchange="previewImage()" >
 							</label>
 							<span class="ajout-photo-text">jpg, png : 4mo max</span>
 						</div>
@@ -76,7 +76,7 @@
 					<label class="label-title" for="title">Titre</label>
 					<input class="input-title input-ajout-photo" type="text" id="title" required>
 					<label class="label-title" for="select-category">Catégorie</label>
-					<select class="input-ajout-photo" id="select-category">
+					<select class="input-ajout-photo" id="select-category" required>
 						<option value="">--Choisir la categorie--</option>								
 						<option value="1">Objets</option>
 						<option value="2">Appartements</option>
