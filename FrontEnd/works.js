@@ -195,7 +195,7 @@ function previewImage() {
     const previewImageContainer = document.getElementById('previewImageContainer');
     previewImageContainer.style.display = "flex";
     
-    if(file.type.match('image.*')){//it controls image being read only
+    if(file.type.match('image.*')){//controler le format du fichier
         const reader = new FileReader();
             reader.addEventListener('load', function (event) {        
             const imageUrl = event.target.result;//result en cas de succes
@@ -203,7 +203,7 @@ function previewImage() {
             
              image.addEventListener('load', function(event) {
                   document.getElementById("inputImageContainer").style.display = "none";
-                  previewImageContainer.innerHTML = ''; // Vider le conteneur au cas où il y aurait déjà des images.
+                  previewImageContainer.innerHTML = ''; //vider le conteneur au cas où il y aurait déjà des images.
                   previewImageContainer.appendChild(image);
               }); 
             
@@ -212,7 +212,7 @@ function previewImage() {
             image.style.height = '170px'; 
         });
         
-        reader.readAsDataURL(file);//is used to read the contents of the specified File.
+        reader.readAsDataURL(file);//lire le contenu du file
         imageLoaded = true;
     }
 }
@@ -221,7 +221,7 @@ function previewImage() {
 const btnConfirm = document.querySelector(".btn-valider");
 btnConfirm.addEventListener("click", async(event)=>{    
     const formData = new FormData(); 
-    event.preventDefault();//prevent the page from refreshing 
+    event.preventDefault();
     try {
         formData.append("title", document.getElementById("title").value);
         formData.append("category", parseInt(document.getElementById("select-category").value));
@@ -235,7 +235,7 @@ btnConfirm.addEventListener("click", async(event)=>{
         headers: { Authorization: 'Bearer ' + token }
         });
 
-    if (response.status === 200 || response.status === 201){
+    if (response.status === 201){
         resetBtnForm();// Reset bouton et formulaire
         document.querySelector(".open-modal").click();  
         showGallery(0);
