@@ -13,7 +13,6 @@ async function login(event) {
         if (response.status === 200){
             const tabUser  = await response.json();
             const token = tabUser.token;
-            console.log(token);//affiche dans le console
             window.localStorage.setItem("token",token );//sauvegarde le token
             window.location.replace("index.html");//redirection vers la page index.html
         } else {

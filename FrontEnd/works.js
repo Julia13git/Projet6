@@ -1,10 +1,9 @@
 // Variables gloables
-const gallery = document.querySelector(".gallery");//recuperation du block "gallery" en HTML
-const category = document.querySelector(".category");//recuperation du block "category" en HTML
+const gallery = document.querySelector(".gallery");//recuperation du block "gallery"
+const category = document.querySelector(".category");//recuperation du block "category"
 // Récupération token éventuellement stockées dans le localStorage
 const token = window.localStorage.getItem("token");
 //L'appel de cette fonction avec en paramètre l'Event associé 
-//permet de trouver par target l'élément qui en est à l'origine et ainsi lui affecter une nouvelle class.
 const actionBtnFilter = function(event) {         
     showGallery(event.target.dataset.category);
     event.target.classList.add("btn-active"); 
@@ -25,8 +24,6 @@ async function createFilter(){
     let response = await fetch("http://localhost:5678/api/categories");
     let categories = await response.json();
     categories = categories.forEach(categorie => {
-        //.then(response => response.json())
-        //.then(categories => categories.forEach(categorie => {
         const button = document.createElement("button");
         button.setAttribute("data-category",categorie.id);
         button.setAttribute("class","btn-filter");
@@ -44,7 +41,6 @@ async function showGallery(categoryBtn){
     }
     
     // Boucle pour supprimer un par un les elements figures
-    //document.querySelectorAll(".gallery figure").forEach(function(figure){figure.remove()});
     document.querySelectorAll(".gallery figure").forEach( figure=> figure.remove());
     
     
@@ -52,8 +48,6 @@ async function showGallery(categoryBtn){
     let response = await fetch("http://localhost:5678/api/works");
     let works = await response.json();
     works = works.forEach(work => {
-        //.then(response => response.json())
-        //.then(works => works.forEach(work => {
         // Filtre sur la categorie ou tt la galerie
         if (work.categoryId == categoryBtn || categoryBtn == 0){
             const figure = document.createElement("figure");
@@ -79,7 +73,6 @@ btnTous.classList.add("btn-active");
 
 //Condition pour le token
 if (token) {
-    console.log("token:" + token);
     const filterGroup = document.querySelector(".category");//on recupere le block avec les filtres en HTML
     filterGroup.remove();//on supprime les filtres
     
